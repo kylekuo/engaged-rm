@@ -11,6 +11,10 @@
 	import { QueryResponse } from '@/graphql/response/types';
 	import { CharacterFields } from "@/graphql/fragments/Character";
 
+	definePageMeta({
+		layout: 'item'
+	});
+
 	const route = useRoute();
 
 	const query = gql`

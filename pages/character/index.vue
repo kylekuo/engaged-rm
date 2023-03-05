@@ -23,6 +23,10 @@
 <script lang="ts" setup>
 	import { QueryResponse } from '@/graphql/response/types'
 
+	definePageMeta({
+		layout: 'list'
+	});
+
 	const query = gql`
 		query {
 			characters {

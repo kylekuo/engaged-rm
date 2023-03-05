@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import svgLoader from 'vite-svg-loader';
+
 export default defineNuxtConfig({
 	modules: ['@nuxtjs/apollo'],
   apollo: {
@@ -8,7 +9,21 @@ export default defineNuxtConfig({
       }
     },
   },
+  css: [
+    '~/assets/css/main.css'
+  ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
 	typescript: {
 		shim: false
 	},
+	vite: {
+		plugins: [
+      svgLoader()
+    ]
+	}
 })
