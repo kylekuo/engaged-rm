@@ -37,7 +37,7 @@
 			</template>
 			
 			<template v-else-if="characters && characters.length === 0">
-				<div class="no-result">no result for query</div>
+				<div class="no-result">No results for "{{ qName }}"</div>
 			</template>
 			
 			<template v-else>
@@ -221,8 +221,13 @@
 					}
 				}
 
-				.error {
+				.error,
+				.no-result {
 					@apply grid place-items-center py-4;
+				}
+
+				.no-result {
+					@apply text-xl;
 				}
 
 				.item-row {
