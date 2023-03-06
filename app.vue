@@ -11,7 +11,7 @@
   @layer components {
 
     #app {
-      @apply w-full h-full px-4 bg-neutral-50 text-cerulean-900;
+      @apply w-full h-full px-4;
     }
 
   }
