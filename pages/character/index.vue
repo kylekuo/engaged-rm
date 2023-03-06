@@ -3,7 +3,7 @@
 
 		<div class="filters">
 			<input 
-				v-model="queryVariables.name" 
+				v-model="qName" 
 				placeholder="Search for characters in Rick and Morty"
 			/>
 		</div>
@@ -11,11 +11,11 @@
 		<div class="list-bar" v-if="resultInfo">
 			<div class="count">{{ resultInfo.count ?? 'No' }} results</div>
 			<div class="pagination" v-if="resultInfo.pages > 0">
-				<button @click="changePage(-1)" :disabled="queryVariables.page <= 1">
+				<button @click="changePage(-1)" :disabled="qPage <= 1">
 					<Icon name="material-symbols:arrow-back-rounded" />
 				</button>
-				<div class="pagination-info">{{ queryVariables.page }} of {{ resultInfo.pages }}</div>
-				<button @click="changePage(+1)" :disabled="queryVariables.page >= resultInfo.pages">
+				<div class="pagination-info">{{ qPage }} of {{ resultInfo.pages }}</div>
+				<button @click="changePage(+1)" :disabled="qPage >= resultInfo.pages">
 					<Icon name="material-symbols:arrow-forward-rounded" />
 				</button>
 			</div>
@@ -76,15 +76,32 @@
 		page: number;
 	}
 
-	const queryVariables = ref<QueryParameters>({
-		name: '',
-		page: Number(route.params.page ?? 1),
+	const qName = ref(''),
+				qPage = ref( Number(route.params.page ?? 1) ),
+				urlParams = ref<QueryParameters>({
+					name: qName.value,
+					page: qPage.value
+				});
+				
+	watch([qName, qPage], ([newName, newPage], [oldName, oldPage]) => {
+		
+		if (newName !== oldName) qPage.value = 1; 
+
+		urlParams.value = { 
+			name: qName.value, 
+			page: qPage.value
+		}
+
 	});
 
-	watch(queryVariables, () => {
+	watch(urlParams, () => {
 		loading.value = true;
-		router.push({ query: queryVariables.value });
-	}, { deep: true })
+		router.push({ query: {
+			...route.params,
+			...urlParams.value
+		} });
+	});
+
 
 	const query = gql`
 		query ($name: String, $page: Int = 1) {
@@ -111,7 +128,11 @@
 	`;
 
 	// const { data, pending, error, refresh } = await useAsyncQuery<QueryResponse>(query, queryVariables);
-	const { result, loading, error, refetch } = await useQuery<QueryResponse>(query, queryVariables, { debounce: 500 });
+	const { result, variables, loading, error, refetch } = await useQuery<QueryResponse>(
+		query, 
+		urlParams, 
+		{ debounce: 500 }
+	);
 
 	const resultInfo = ref<ResultInfo | null>(null),
 				characters = ref<Character[] | null>(null);
@@ -130,14 +151,15 @@
 
 	const changePage = (offset: number) => {
 
-		let newPage = queryVariables.value.page + offset,
+		let page = variables.value?.page ?? 1,
+				newPage = page + offset,
 				min = 1,
 				max = result.value?.characters?.info?.pages;
 
 		if (newPage < min) newPage = min;
 		if (max && newPage > max) newPage = max;
 
-		queryVariables.value.page = newPage;
+		qPage.value = newPage;
 
 	}
 </script>
