@@ -8,19 +8,23 @@
 		}"
 	>
 
-		<div class="input-wrap">
-			<input 
-				v-model="term" 
-				v-on:keyup.enter="handleEnter"
-				type="text"
-				placeholder="Search for Rick and Morty characters"
-			>
-			<template v-if="loading">
-				<Icon name="eos-icons:bubble-loading" />
-			</template>
-		</div>
+		<Icon v-if="loading" name="eos-icons:bubble-loading" />
+
+		<input 
+			type="text"
+			placeholder="Search for Rick and Morty characters"
+			v-model="term" 
+			v-on:keyup.enter="handleEnter"
+		>
 
 		<div id="suggestions">
+			<NuxtLink 
+				v-if="term" 
+				:to="`/character?name=${term}`"
+				class="name-search"
+			>
+				Search for "{{ term }}"
+			</NuxtLink>
 			<NuxtLink
 				v-for="sugg in characters"
 				:key="sugg.id"
@@ -101,24 +105,21 @@
 		#general-search {
 			@apply relative;
 
-			.input-wrap {
-				@apply relative w-full h-12;
+			input {
+				@apply relative w-full h-12 px-4;
+				@apply border-2 border-solid border-cerulean-500 dark:border-cerulean-300 rounded-full outline-none;
+				@apply text-inherit bg-transparent;
 				@apply transition-colors duration-150 ease-out;
-				@apply border-2 border-solid border-cerulean-500 dark:border-cerulean-300 rounded-full;				
 				@apply overflow-hidden z-10;
 
-				&:focus-within {
+				&:focus {
 					@apply border-lime-500 dark:border-lime-300;
 				}
 
-				& > input {
-					@apply w-full h-full px-4 outline-none;
-					@apply text-inherit bg-transparent;
-				}
+			}
 
-				& > svg {
-					@apply absolute top-1/2 right-4 -translate-y-1/2;
-				}
+			& > svg {
+				@apply absolute top-1/2 right-4 -translate-y-1/2;
 			}
 
 			&.enabled:focus-within:not(.loading) {
@@ -148,6 +149,14 @@
 				& > a {
 					&:not(:last-child) {
 						@apply border-b-2 border-inherit;
+					}
+				}
+
+				.name-search {
+					@apply px-4 py-2;
+
+					&:hover {
+						@apply bg-lime-200 dark:bg-lime-900;
 					}
 				}
 
