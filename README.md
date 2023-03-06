@@ -1,42 +1,27 @@
-# Nuxt 3 Minimal Starter
+# Rick and Morty Character Explorer
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Stack :toolbox:
+[Nuxt 3](https://nuxt.com/) / [Vue 3](https://vue.org/) / [Apollo](https://www.apollographql.com/) / [GraphQL](https://graphql.org/) / [TypeScript](https://www.typescriptlang.org/)
 
-## Setup
+## API :card_file_box:
+[Rick and Morty API](https://rickandmortyapi.com/)
 
-Make sure to install the dependencies:
+### Setup
 
 ```bash
-# yarn
-yarn install
-
-# npm
 npm install
-
-# pnpm
-pnpm install
 ```
 
-## Development Server
-
-Start the development server on http://localhost:3000
+### Development Server
 
 ```bash
+# Start the development server on http://localhost:3000
 npm run dev
 ```
 
-## Production
-
-Build the application for production:
+### Production
 
 ```bash
+# Build the application for production
 npm run build
 ```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
