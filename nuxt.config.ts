@@ -1,8 +1,9 @@
 import svgLoader from 'vite-svg-loader';
 
 export default defineNuxtConfig({
-	modules: [
+  modules: [
     '@nuxtjs/apollo',
+    '@nuxtjs/color-mode',
     'nuxt-icon'
   ],
   apollo: {
@@ -22,6 +23,9 @@ export default defineNuxtConfig({
       ],
       link: [{ rel: 'icon', href: '/favicon-rm.svg' }],
     },
+  },
+  colorMode: {
+    classSuffix: '',
   },
   css: [
     '~/assets/css/main.css'
