@@ -29,14 +29,14 @@
 				</div>
 			</template>
 			
-			<template v-else-if="error || !characters">
+			<template v-else-if="error">
 				<div class="error">
 					Seems like something went wrong!
 					<button class="underlined-link" @click="$router.go(0)">Try again</button>
 				</div>
 			</template>
 			
-			<template v-else-if="characters.length === 0">
+			<template v-else-if="characters && characters.length === 0">
 				<div class="no-result">no result for query</div>
 			</template>
 			
@@ -81,32 +81,15 @@
 		page: number;
 	}
 
-	const qName = ref(''),
-				qPage = ref( Number(route.params.page ?? 1) ),
+	const qName = ref( String(route.query.name ?? '') ),
+				qPage = ref( Number(route.query.page ?? 1) ),
 				urlParams = ref<QueryParameters>({
 					name: qName.value,
 					page: qPage.value
 				});
-				
-	watch([qName, qPage], ([newName, newPage], [oldName, oldPage]) => {
-		
-		if (newName !== oldName) qPage.value = 1; 
 
-		urlParams.value = { 
-			name: qName.value, 
-			page: qPage.value
-		}
-
-	});
-
-	watch(urlParams, () => {
-		loading.value = true;
-		router.push({ query: {
-			...route.params,
-			...urlParams.value
-		} });
-	});
-
+	const resultInfo = ref<ResultInfo | null>(null),
+				characters = ref<Character[] | null>(null);
 
 	const query = gql`
 		query ($name: String, $page: Int = 1) {
@@ -139,8 +122,25 @@
 		{ debounce: 500 }
 	);
 
-	const resultInfo = ref<ResultInfo | null>(null),
-				characters = ref<Character[] | null>(null);
+	watch([qName, qPage], ([newName, newPage], [oldName, oldPage]) => {
+
+		if (newName !== oldName) qPage.value = 1; 
+
+		urlParams.value = { 
+			name: newName, 
+			page: newPage
+		}
+
+		loading.value = true;
+
+		router.push({ 
+			query: {
+				...route.params,
+				...urlParams.value
+			} 
+		});
+
+	});
 
 	watch([result, loading, error], () => {
 

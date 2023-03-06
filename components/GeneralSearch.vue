@@ -11,10 +11,13 @@
 		<div class="input-wrap">
 			<input 
 				v-model="term" 
+				v-on:keyup.enter="handleEnter"
 				type="text"
 				placeholder="Search for Rick and Morty characters"
-			/>
-			<Icon v-if="loading" name="eos-icons:bubble-loading" />
+			>
+			<template v-if="loading">
+				<Icon name="eos-icons:bubble-loading" />
+			</template>
 		</div>
 
 		<div id="suggestions">
@@ -39,6 +42,8 @@
 
 <script setup lang="ts">
 	import { Character } from 'rickmortyapi';
+
+	const router = useRouter();
 
 	const term = ref(''),
 				enabled = ref(false),
@@ -76,6 +81,16 @@
 		if (!newValue) characters.value = [];
 		characters.value = newValue.characters?.results ?? [];
 	})
+
+	const handleEnter = () => {
+		if (term.value) router.push({
+			name: 'character',
+			query: {
+				name: term.value,
+				page: 1
+			}
+		});
+	}
 
 </script>
 
