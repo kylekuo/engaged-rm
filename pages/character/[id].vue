@@ -2,11 +2,16 @@
 	<main page="character-item" :class="{ pending, error: !character }">
 
 		<template v-if="pending">
-			<div class="loading">loading</div>
+			<div class="loading">
+				<Icon name="eos-icons:bubble-loading" />
+			</div>
 		</template>
 
-		<template v-else-if="!character">
-			<div class="error">error</div>
+		<template v-else-if="error || !character">
+			<div class="error">
+				Seems like something went wrong!
+				<button class="underlined-link" @click="$router.go(0)">Try again</button>
+			</div>
 		</template>
 
 		<template v-else>
@@ -111,7 +116,7 @@
 		}
 	`;
 
-	const { pending, data } = await useLazyAsyncQuery<QueryResponse>(query);
+	const { pending, data, error } = await useLazyAsyncQuery<QueryResponse>(query);
 	
 	watch(data, (newValue, oldValue) => {
 		
@@ -176,6 +181,18 @@
 		[page="character-item"] {
 			@apply flex flex-col justify-start items-start gap-8;
 			@apply md:flex-row;
+
+			.loading {
+				@apply grid place-items-center w-full py-4;
+
+				svg {
+					@apply w-16 h-auto aspect-square;
+				}
+			}
+
+			.error {
+				@apply grid place-items-center w-full py-4;
+			}
 			
 			aside {
 				@apply flex flex-col justify-start items-start gap-2;

@@ -24,11 +24,16 @@
 		<div class="result">
 
 			<template v-if="loading">
-				<div class="loading">loading</div>
+				<div class="loading">
+					<Icon name="eos-icons:bubble-loading" />
+				</div>
 			</template>
 			
 			<template v-else-if="error || !characters">
-				<div class="error">error</div>
+				<div class="error">
+					Seems like something went wrong!
+					<button class="underlined-link" @click="$router.go(0)">Try again</button>
+				</div>
 			</template>
 			
 			<template v-else-if="characters.length === 0">
@@ -207,6 +212,18 @@
 			}
 
 			.result {
+				.loading {
+					@apply grid place-items-center py-4;
+
+					svg {
+						@apply w-16 h-auto aspect-square;
+					}
+				}
+
+				.error {
+					@apply grid place-items-center py-4;
+				}
+
 				.item-row {
 					@apply grid grid-cols-12 auto-rows-auto gap-4;
 
