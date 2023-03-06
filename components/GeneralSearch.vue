@@ -1,14 +1,21 @@
 <template>
 	<div 
 		id="general-search"
-		:class="{ loading, error, enabled }"
+		:class="{ 
+			loading, 
+			error, 
+			enabled: enabled && characters.length > 0
+		}"
 	>
 
-		<input 
-			v-model="term" 
-			type="text"
-			placeholder="Search for Rick and Morty characters"
-		>
+		<div class="input-wrap">
+			<input 
+				v-model="term" 
+				type="text"
+				placeholder="Search for Rick and Morty characters"
+			/>
+			<Icon v-if="loading" name="eos-icons:bubble-loading" />
+		</div>
 
 		<div id="suggestions">
 			<NuxtLink
@@ -22,7 +29,6 @@
 					</div>
 					<div class="si-info">
 						<span class="name">{{ sugg.name }}</span>
-						<span class="id">{{ sugg.id }}</span>
 					</div>
 				</div>
 			</NuxtLink>
@@ -79,16 +85,24 @@
 	
 		#general-search {
 			@apply relative;
-			
-			input {
-				@apply relative w-full h-12 px-4;
-				@apply border-2 border-solid border-cerulean-500 rounded-full outline-none;
-				@apply text-neutral-800 bg-neutral-50;
-				@apply transition-colors duration-150 ease-out;
-				@apply z-10;
 
-				&:focus {
+			.input-wrap {
+				@apply relative w-full h-12;
+				@apply transition-colors duration-150 ease-out;
+				@apply border-2 border-solid border-cerulean-500 rounded-full;				
+				@apply overflow-hidden z-10;
+
+				&:focus-within {
 					@apply border-lime-400;
+				}
+
+				& > input {
+					@apply w-full h-full px-4 outline-none;
+					@apply text-inherit bg-neutral-50;
+				}
+
+				& > svg {
+					@apply absolute top-1/2 right-4 -translate-y-1/2;
 				}
 			}
 
