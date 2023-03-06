@@ -33,9 +33,12 @@
 			@apply py-8;
 
 			svg {
-				width: 5em;
-				height: auto;
-				aspect-ratio: 1;
+				@apply w-20 h-auto overflow-visible;
+				@apply transition-colors duration-150 ease-out;
+
+				&:hover {
+					@apply text-cerulean-500;
+				}
 			}
 		}
 
