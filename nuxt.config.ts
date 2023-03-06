@@ -1,7 +1,10 @@
 import svgLoader from 'vite-svg-loader';
 
 export default defineNuxtConfig({
-	modules: ['@nuxtjs/apollo'],
+	modules: [
+    '@nuxtjs/apollo',
+    'nuxt-icon'
+  ],
   apollo: {
     clients: {
       default: {
