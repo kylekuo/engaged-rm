@@ -174,7 +174,7 @@
 	@layer components {
 
 		[page="character-list"] {
-			@apply flex flex-col justify-start items-stretch gap-4;
+			@apply flex flex-col justify-start items-stretch;
 
 			.filters {
 				input {
@@ -191,6 +191,7 @@
 
 			.list-bar {
 				@apply flex flex-wrap justify-between items-center gap-4;
+				@apply sticky top-0 py-4 bg-neutral-50 z-10;
 				
 				.pagination {
 					@apply flex justify-start items-center gap-4;
