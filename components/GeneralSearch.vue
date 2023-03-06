@@ -34,8 +34,8 @@
 <script setup lang="ts">
 	import { Character } from 'rickmortyapi';
 
-	const term = ref('rick'),
-				enabled = ref(true),
+	const term = ref(''),
+				enabled = ref(false),
 				characters = ref<Character[]>([]);
 
 	const suggestionsQuery = gql`
@@ -82,8 +82,7 @@
 			
 			input {
 				@apply relative w-full h-12 px-4;
-				@apply border-2 border-solid border-cerulean-500 rounded-full;
-				@apply outline-none;
+				@apply border-2 border-solid border-cerulean-500 rounded-full outline-none;
 				@apply text-neutral-800 bg-neutral-50;
 				@apply transition-colors duration-150 ease-out;
 				@apply z-10;
