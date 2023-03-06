@@ -9,10 +9,6 @@
 				List all characters
 			</NuxtLink>
 
-			<!-- <NuxtLink :to="'episode'">
-				List all episodes
-			</NuxtLink> -->
-
 		</nav>
 
 	</main>
@@ -36,7 +32,7 @@
 			}
 			
 			& > nav {
-				@apply flex flex-wrap justify-center align-baseline gap-4 mt-4 mb-40;
+				@apply flex flex-wrap justify-center align-baseline gap-4 mt-4;
 			}
 		}
 

@@ -2,19 +2,6 @@
 	<div layout="list" class="layout">
 		<Header />
 		<slot />
+		<Footer />
 	</div>
 </template>
-
-<script setup lang="ts">
-</script>
-
-<style lang="scss">
-	@tailwind components;
-	@layer components {
-
-		[layout="list"] {
-
-		}
-
-	}
-</style>

@@ -2,6 +2,7 @@
 	<div layout="home">
 		<Logo />
 		<slot />
+		<Footer />
 	</div>
 </template>
 
@@ -11,19 +12,15 @@
 
 <style lang="scss">
 	[layout="home"] {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 1em;
-
-		width: 100%;
-		height: 100%;
+		@apply flex flex-col justify-center items-center gap-4 w-full h-full;
 
 		& > svg {
-			width: 10em;
-			height: auto;
-			aspect-ratio: 1;
+			@apply w-40 h-auto;
+		}
+
+		& > svg,
+		& > footer {
+			@apply mt-auto;
 		}
 	}
 </style>
