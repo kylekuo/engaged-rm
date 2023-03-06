@@ -180,7 +180,7 @@
 				input {
 					@apply relative w-full h-12 px-4;
 					@apply border-2 border-solid border-cerulean-500 rounded-full outline-none;
-					@apply text-neutral-800 bg-neutral-50;
+					@apply bg-stone-50 dark:bg-stone-900;
 					@apply transition-colors duration-150 ease-out;
 
 					&:focus {
@@ -191,7 +191,7 @@
 
 			.list-bar {
 				@apply flex flex-wrap justify-between items-center gap-4;
-				@apply sticky top-0 py-4 bg-neutral-50 z-10;
+				@apply sticky top-0 py-4 bg-stone-50 dark:bg-stone-900 z-10;
 				
 				.pagination {
 					@apply flex justify-start items-center gap-4;
@@ -202,7 +202,7 @@
 						@apply transition-colors duration-150 ease-out;
 						
 						&:disabled {
-							@apply opacity-50 border-neutral-600 text-neutral-600 pointer-events-none;
+							@apply opacity-50 border-stone-600 text-stone-600 pointer-events-none;
 						}
 						
 						&:hover {
@@ -267,10 +267,10 @@
 						}
 
 						&:hover {
-							@apply border-cerulean-500;
+							@apply border-cerulean-500 dark:border-cerulean-700;
 
 							.item-info {
-								@apply bg-cerulean-500 text-neutral-50;
+								@apply bg-cerulean-500 dark:bg-cerulean-700 text-stone-50;
 							}
 						}
 					}

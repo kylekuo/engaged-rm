@@ -37,7 +37,7 @@
 				@apply transition-colors duration-150 ease-out;
 
 				&:hover {
-					@apply text-cerulean-500;
+					@apply text-cerulean-500 dark:text-cerulean-300;
 				}
 			}
 		}

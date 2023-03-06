@@ -274,7 +274,7 @@
 				}
 
 				#created {
-					@apply text-xs text-right text-neutral-500;
+					@apply text-xs text-right text-stone-500;
 				}
 			}
 		}

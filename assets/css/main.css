@@ -10,13 +10,16 @@ body,
 	height: 100%
 }
 
-html {
-	@apply bg-neutral-50 text-cerulean-900
+body {
+	@apply bg-stone-50 text-cerulean-900;
+	@apply dark:bg-stone-900 dark:text-stone-50;
 }
 
 .underlined-link {
-	@apply underline decoration-2 underline-offset-2 decoration-lime-400 transition-colors ease-out duration-150;	
+	@apply underline decoration-2 underline-offset-2 decoration-lime-500;
+	@apply transition-colors ease-out duration-150;	
 }
 .underlined-link:hover {
 	@apply text-cerulean-500 decoration-transparent;
+	@apply dark:text-cerulean-300;
 }

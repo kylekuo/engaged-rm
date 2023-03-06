@@ -1,15 +1,18 @@
 <template>
 	<footer>
 
-		<div id="author">
-			Made by 
-			<NuxtLink 
-				to="https://kylekuo.dev/"
-				target="_blank"
-				class="underlined-link"
-			>
-				Kyle Kuo
-			</NuxtLink>
+		<div>	
+			<div id="author">
+				Made by 
+				<NuxtLink 
+					to="https://kylekuo.dev/"
+					target="_blank"
+					class="underlined-link"
+				>
+					Kyle Kuo
+				</NuxtLink>
+			</div>
+			<ThemeControl />
 		</div>
 		
 		<section id="credits">
@@ -49,21 +52,26 @@
 	@layer components {
 
 		footer {
-			@apply flex flex-wrap justify-between items-start w-full py-8;
+			@apply flex flex-col justify-between items-start gap-4;
+			@apply sm:flex-wrap sm:flex-row;
+			@apply w-full py-8;
+
+			& > * {
+				@apply flex flex-col justify-start gap-4;
+			}
 			
 			#credits {
-				@apply flex flex-col justify-start items-end gap-4;
-				
+				@apply sm:items-end;
+			
 				#stack {
 					@apply flex justify-end items-baseline gap-2;
-
+	
 					svg {
 						@apply w-8 h-auto;
 					}
 				}
 			}
-
+			
 		}
-
 	}
 </style>

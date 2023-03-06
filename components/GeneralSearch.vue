@@ -104,16 +104,16 @@
 			.input-wrap {
 				@apply relative w-full h-12;
 				@apply transition-colors duration-150 ease-out;
-				@apply border-2 border-solid border-cerulean-500 rounded-full;				
+				@apply border-2 border-solid border-cerulean-500 dark:border-cerulean-300 rounded-full;				
 				@apply overflow-hidden z-10;
 
 				&:focus-within {
-					@apply border-lime-400;
+					@apply border-lime-500 dark:border-lime-300;
 				}
 
 				& > input {
 					@apply w-full h-full px-4 outline-none;
-					@apply text-inherit bg-neutral-50;
+					@apply text-inherit bg-transparent;
 				}
 
 				& > svg {
@@ -125,7 +125,7 @@
 				&::before {
 					content: '';
 					@apply absolute bottom-0 left-0 right-0;
-					@apply h-6 border-x-2 border-lime-400;
+					@apply h-6 border-x-2 border-lime-500 dark:border-lime-300;
 				}
 			}
 
@@ -141,8 +141,8 @@
 				@apply absolute top-full left-0 right-0;
 				@apply flex flex-col justify-start items-stretch;
 				@apply max-h-64 overflow-x-hidden overflow-y-auto;
-				@apply pt-1 pb-2 border-x-2 border-b-2 border-lime-400 rounded-b-lg;
-				@apply bg-neutral-50;
+				@apply pt-1 pb-2 border-x-2 border-b-2 border-lime-500 dark:border-lime-300 rounded-b-lg;
+				@apply bg-stone-50 dark:bg-stone-900;
 				@apply z-10;
 				
 				& > a {
@@ -155,7 +155,7 @@
 					@apply flex justify-start items-center gap-4 px-4 py-2;
 					
 					&:hover {
-						@apply bg-lime-200;
+						@apply bg-lime-200 dark:bg-lime-900;
 					}
 
 					img {
